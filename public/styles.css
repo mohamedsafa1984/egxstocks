@@ -415,5 +415,24 @@ body[data-theme="light"] .table th{
   }
 }
 
+/* ===== Keep topbar always on top (mobile) ===== */
+@media (max-width: 720px){
 
+  .topbar{
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    z-index: 9999 !important;
+    background: rgba(10,14,20,0.92); /* أوضح شوية */
+  }
+
+  /* لازم نعوّض ارتفاع الهيدر علشان المحتوى مايدخلش تحته */
+  body{
+    padding-top: 74px; /* لو الهيدر عندك بيكسر سطرين خليها 92px */
+  }
+
+  /* خليه أقل “تدخّل” في المساحة */
+  .disclaimer{
+    margin-top: 10px;
+  }
+}
 }
