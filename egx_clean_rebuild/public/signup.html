@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>إنشاء حساب</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">منصة توصيات EGX</div>
+    <nav class="nav">
+      <a class="btn btn-ghost" href="index.html">رجوع</a>
+      <a class="btn" href="login.html">تسجيل دخول</a>
+    
+      <label class="themeSwitch" title="Night/Day">
+        <input type="checkbox" id="themeToggle">
+        <span>🌙/☀️</span>
+      </label>
+    </nav>
+  </header>
+
+  <main class="authWrap">
+    <div class="card authCard">
+      <div class="card-title">إنشاء حساب</div>
+      <div class="muted">مطلوب فقط لإضافة توصيات. التصفح مجاني للجميع.</div>
+
+      <form id="signupForm" class="authForm">
+        <div class="field">
+          <label>اسم المستخدم</label>
+          <input id="suUsername" type="text" required />
+        </div>
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input id="suEmail" type="email" required />
+        </div>
+        <div class="field">
+          <label>كلمة المرور</label>
+          <input id="suPassword" type="password" minlength="4" required />
+        </div>
+
+        <div class="row between">
+          <button class="btn" type="submit">إنشاء</button>
+          <span class="muted" id="signupMsg"></span>
+        </div>
+        <div class="field">
+          <label>تأكيد كلمة المرور</label>
+          <input id="suPassword2" type="password" minlength="4" required />
+        </div>
+
+        <label class="checkRow">
+          <input type="checkbox" id="showSignupPass" />
+          <span>إظهار كلمة المرور</span>
+        </label>
+
+      </form>
+    </div>
+  </main>
+
+  <script type="module" src="auth.js"></script>
+  <script src="theme.js"></script>
+</body>
+</html>

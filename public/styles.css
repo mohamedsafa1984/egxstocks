@@ -1,0 +1,229 @@
+:root{
+  --bg:#0b0f14;
+  --panel:#101823;
+  --panel2:#0f1722;
+  --text:#e8eef7;
+  --muted:#aab6c5;
+  --amber:#ffb020;
+  --amber2:#ffcc66;
+  --danger:#ff4d4d;
+  --border:#233043;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 800px at 20% 0%, #152236 0%, var(--bg) 45%, #070a0f 100%);
+  color:var(--text);
+}
+
+a{color:inherit; text-decoration:none}
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px;
+  border-bottom:1px solid var(--border);
+  background:rgba(10,14,20,0.7);
+  backdrop-filter: blur(8px);
+  position:sticky; top:0; z-index:10;
+}
+.brand{font-weight:800; letter-spacing:.3px}
+.nav{display:flex; gap:10px; align-items:center}
+
+.btn{
+  background:linear-gradient(180deg, var(--amber2), var(--amber));
+  border:none;
+  color:#201400;
+  padding:9px 12px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn:hover{filter:brightness(1.03)}
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+/* When logged in, we turn the login link into a non-clickable username chip */
+.user-chip{
+  border-color:#3a2f16;
+  color:var(--amber);
+  cursor:default;
+}
+.btn-warn{
+  background:transparent;
+  border:1px solid #3a2f16;
+  color:var(--amber);
+}
+.iconBtn{
+  background:transparent;border:none;color:var(--text);
+  font-size:18px; cursor:pointer;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns: 1fr 320px;
+  gap:14px;
+  padding:16px;
+}
+@media (max-width: 980px){
+  .layout{grid-template-columns:1fr}
+}
+
+.card{
+  background:linear-gradient(180deg, rgba(16,24,35,.9), rgba(13,19,28,.92));
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.card-title{font-weight:800; margin-bottom:10px}
+.muted{color:var(--muted); font-size:13px}
+
+.tinyRow{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.row{display:flex; gap:12px; align-items:end; flex-wrap:wrap}
+.row.between{justify-content:space-between; align-items:center}
+
+/* Quick role filter chips (Admin) */
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chipBtn{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  cursor:pointer;
+}
+.chipBtn:hover{filter:brightness(1.05)}
+.chipBtn.active{
+  border-color:#3a2f16;
+  color:var(--amber);
+}
+
+.field{flex:1; min-width:220px}
+label{display:block; font-size:12px; color:var(--muted); margin-bottom:6px}
+input, select, textarea{
+  width:100%;
+  padding:10px 11px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(7,10,15,.55);
+  color:var(--text);
+  outline:none;
+}
+textarea{resize:vertical}
+
+.disclaimer{
+  border:1px solid rgba(255,77,77,.35);
+  background:linear-gradient(180deg, rgba(60,16,16,.45), rgba(20,10,12,.65));
+}
+.disclaimer-title{color:#ff7b7b; font-weight:900; margin-bottom:6px}
+.disclaimer-text{color:#ffd1d1; font-size:13px; line-height:1.6}
+
+.chartWrap{margin-top:12px; border-radius:14px; overflow:hidden; border:1px solid var(--border)}
+#tv_chart{height:420px; width:100%; background:#0b0f14}
+
+.tableWrap{overflow:auto; margin-top:10px}
+.table{width:100%; border-collapse:collapse; min-width:720px}
+.table th, .table td{
+  border-bottom:1px solid var(--border);
+  padding:10px;
+  text-align:right;
+  font-size:13px;
+  white-space:nowrap;
+}
+.table th{color:var(--amber); font-weight:800}
+
+.side .award-title{font-weight:900; color:var(--amber)}
+.award-text{color:var(--muted); font-size:13px; line-height:1.6}
+.contact-text{font-size:18px; font-weight:900; color:var(--amber)}
+
+.authWrap{display:flex; justify-content:center; padding:30px 16px}
+.authCard{width:min(520px, 100%)}
+.authForm{margin-top:10px; display:flex; flex-direction:column; gap:10px}
+
+.modal{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center; justify-content:center;
+  padding:16px;
+  z-index:50;
+}
+.modal[aria-hidden="false"]{display:flex}
+.modal-card{
+  width:min(720px, 100%);
+  background:linear-gradient(180deg, rgba(16,24,35,.96), rgba(10,14,20,.96));
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+}
+.modal-head{display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-bottom:1px solid var(--border)}
+.modal-title{font-weight:900}
+.modal-body{padding:14px}
+
+.sep{border:0;border-top:1px solid var(--border);margin:12px 0}
+.subTitle{font-weight:900;margin-bottom:8px}
+.adminBlock .muted{margin-bottom:8px}
+.miniForm .field{margin-bottom:10px}
+.miniForm input{width:100%}
+.table tr.isHidden{opacity:.45}
+.table tr.isBasicHidden{opacity:.75; filter: grayscale(20%)}
+
+.miniSel{
+  padding:6px 8px;
+  border:1px solid rgba(255,255,255,0.18);
+  border-radius:10px;
+  background: rgba(0,0,0,0.12);
+  color: inherit;
+}
+.btn-sm{padding:6px 10px;font-size:12px;border-radius:10px}
+
+.adminBtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+
+
+
+/* Light theme override + theme toggle */
+body[data-theme="light"]{
+  --bg:#f4f7fb;
+  --panel:#ffffff;
+  --panel2:#ffffff;
+  --text:#0b1220;
+  --muted:#4b5563;
+  --amber:#ff8f00;
+  --amber2:#ffb74d;
+  --danger:#d32f2f;
+  --border:#d7dee8;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+  color:var(--text);
+}
+body[data-theme="light"] .themeSwitch{
+  background:rgba(0,0,0,0.03);
+}
+body[data-theme="light"] .btn.btn-ghost{
+  background:transparent;
+}
+body[data-theme="light"] .table th{
+  background:#f2f5fa;
+}
+.themeSwitch{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  cursor:pointer;
+  user-select:none;
+  background:rgba(255,255,255,0.03);
+}
+.themeSwitch input{ display:none; }
+.themeSwitch span{ font-size:14px; color:var(--muted); }
+
+
+
+.checkRow{display:flex;align-items:center;gap:10px;margin:10px 0;color:var(--muted);font-size:14px}
+.checkRow input{transform:scale(1.1)}
