@@ -312,4 +312,108 @@ body[data-theme="light"] .table th{
   .topbar{padding:10px}
   .btn{font-size:12px}
   .table{min-width:520px;}
+
+
+/* =========================
+   Mobile Fix Pack (put at END)
+   ========================= */
+
+@media (max-width: 720px){
+
+  /* عام */
+  body{ font-size: 14px; }
+  .layout{
+    grid-template-columns: 1fr !important;
+    padding: 10px;
+    gap: 10px;
+  }
+  .card{ padding: 12px; border-radius: 14px; }
+
+  /* Topbar */
+  .topbar{
+    padding: 10px 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .nav{
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .btn{ padding: 8px 10px; border-radius: 10px; }
+  .themeSwitch{ padding: 7px 9px; border-radius: 10px; }
+
+  /* Rows / Fields */
+  .row{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .field{
+    min-width: 0 !important;  /* مهم جداً */
+    width: 100%;
+  }
+  input, select, textarea{
+    padding: 12px 12px;
+    border-radius: 12px;
+  }
+
+  /* Disclaimer */
+  .disclaimer-text{
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  /* Chart */
+  .chartWrap{ margin-top: 10px; }
+  #tv_chart{
+    height: 56vh;     /* بدل 420px */
+    min-height: 320px;
+  }
+
+  /* Table: خليه سكرول أفقي نضيف */
+  .tableWrap{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+  }
+  .table{
+    min-width: 900px; /* خليه يسكّرول بدل ما يبوظ اللياوت */
+  }
+
+  /* Admin buttons wrap */
+  .adminBtns{
+    justify-content: stretch;
+  }
+  .adminBtns .btn, .adminBtns .btn-sm{
+    width: 100%;
+  }
+
+  /* Modal: Fullscreen محترم على الموبايل */
+  .modal{
+    padding: 0 !important;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+  .modal-card{
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-head{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: inherit;
+  }
+  .modal-body{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px;
+  }
+}
+
+
 }
