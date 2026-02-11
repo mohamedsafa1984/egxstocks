@@ -1,306 +1,0 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EGX Recommendations</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="topbar">
-    <div class="brand">منصة توصيات EGX</div>
-    <nav class="nav">
-      <a class="btn" id="signupLink" href="signup.html">إنشاء حساب</a>
-      <a class="btn btn-ghost" id="loginLink" href="login.html">تسجيل دخول</a>
-      <button class="btn btn-ghost" id="changePassBtn" style="display:none;">تغيير كلمة السر</button>
-      <button class="btn btn-warn" id="logoutBtn" style="display:none;">خروج</button>
-    
-      <label class="themeSwitch" title="Night/Day">
-        <input type="checkbox" id="themeToggle">
-        <span>🌙/☀️</span>
-      </label>
-    </nav>
-  </header>
-
-  <main class="layout">
-    <section class="main">
-      <div class="card disclaimer">
-        <div class="disclaimer-title">تنبيه مهم وإخلاء المسؤولية</div>
-        <div class="disclaimer-text">
-          هذا الموقع يعرض توصيات تحليلية فقط دون أي مسؤولية. البورصة استثمار عالي المخاطر وليست مقامرة، ويجب استخدام أموال فائضة فقط.
-          القرار الاستثماري مسؤولية شخصية بالكامل. هذا الموقع مجرد محتوى ولا علاقة له بأي نوع من أنواع المقامرة.
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="row">
-          <div class="field">
-            <label>اختيار السهم</label>
-            <select id="stockSelect"></select>
-          </div>
-          <div class="field">
-            <label>بحث سريع باسم السهم</label>
-            <input id="stockSearch" type="text" placeholder="اكتب: COMI / SWDY / ... ثم Enter" />
-          </div>
-        </div>
-
-        <div class="chartWrap">
-          <div id="tv_chart"></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">جدول التوصيات (Public)</div>
-
-        <div class="row between" id="recFilterBar" style="display:none; margin-top:6px;">
-          <div class="muted" id="recFilterText"></div>
-          <button class="btn btn-ghost" id="clearRecFilterBtn">عرض كل التوصيات</button>
-        </div>
-
-        <div class="row between">
-          <div class="muted">التوصيات العامة ظاهرة للجميع. إضافة توصية تتطلب تسجيل دخول.</div>
-          <button class="btn" id="openAddModalBtn">إضافة توصية جديدة</button>
-        </div>
-
-        <div class="tableWrap">
-          <table class="table" id="recTable">
-            <thead>
-              <tr>
-                <th>ثقة المحلل</th>
-                <th>المحلل</th>
-                <th>السهم</th>
-                <th>الدخول</th>
-                <th>الهدف</th>
-                <th>نسبة جني الأرباح</th>
-                <th>الثقه فى التوصيه</th>
-                <th>تاريخ التوصية</th>
-                <th>تاريخ الخروج</th>
-                <th>ملاحظات</th>
-                <th>تاريخ الإضافة</th>
-                <th id="adminColHead" style="display:none;">إدارة</th>
-              </tr>
-            </thead>
-            <tbody id="recBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <aside class="side">
-      <div class="card award">
-        <div class="award-title">🏆 جائزة أفضل محلل</div>
-        <div class="award-text">تُمنح لأفضل أداء تحليلي بناءً على جودة التوصيات والمتابعة.</div>
-      </div>
-
-      <!-- Change password (shown after login) -->
-      <div class="card" id="pwPanel" style="display:none;">
-        <div class="card-title">تغيير كلمة المرور</div>
-        <form id="changePassForm" class="miniForm">
-          <div class="field">
-            <label>كلمة المرور الحالية</label>
-            <input id="cpCurrent" type="password" required />
-          </div>
-          <div class="field">
-            <label>كلمة المرور الجديدة</label>
-            <input id="cpNew" type="password" required />
-          </div>
-          <div class="field">
-            <label>تأكيد كلمة المرور الجديدة</label>
-            <input id="cpNew2" type="password" required />
-          </div>
-          <label class="tinyRow" style="margin-top:6px;">
-            <input type="checkbox" id="cpShow" />
-            <span>إظهار كلمة المرور</span>
-          </label>
-          <button class="btn" type="submit" style="width:100%; margin-top:8px;">تحديث</button>
-          <div class="muted" id="changePassMsg" style="margin-top:6px;"></div>
-        </form>
-      </div>
-
-      <!-- Admin/CEO Panel (hidden by default) -->
-      <div class="card" id="adminPanel" style="display:none;">
-        <div class="card-title">لوحة التحكم</div>
-        <div class="muted" id="adminRoleLine"></div>
-
-        <div class="adminBlock" id="siteSettingsBlock">
-          <div class="subTitle">إعدادات الموقع</div>
-          <label class="tinyRow">
-            <input type="checkbox" id="registrationToggle">
-            <span>فتح التسجيل (Signup)</span>
-          </label>
-          <div class="muted" id="registrationMsg" style="margin-top:6px;"></div>
-        </div>
-
-        <hr class="sep" />
-
-
-        <div class="adminBlock" id="adminRecBlock">
-          <div class="muted">يمكنك إخفاء/إظهار التوصيات من عمود "إدارة" في الجدول.</div>
-          <button class="btn btn-ghost" id="toggleShowHiddenBtn">عرض/إخفاء التوصيات المخفية</button>
-        </div>
-
-        <hr class="sep" />
-
-        <div class="adminBlock" id="userMgmtBlock">
-          <div class="subTitle">إدارة المستخدمين (Admin)</div>
-
-          <form id="createUserForm" class="miniForm">
-            <div class="field">
-              <label>Username</label>
-              <input id="newAdminUsername" type="text" placeholder="analyst_1" required />
-            </div>
-            <div class="field">
-              <label>Email</label>
-              <input id="newAdminEmail" type="email" placeholder="admin@example.com" required />
-            </div>
-            <div class="field">
-              <label>Password</label>
-              <input id="newAdminPassword" type="text" placeholder="password" required />
-            </div>
-            <div class="field">
-              <label>Role</label>
-              <select id="newUserRole">
-                <option value="basic">basic</option>
-                <option value="user">user</option>
-                <option value="admin_add">admin_add</option>
-                <option value="admin_del">admin_del</option>
-                <option value="admin_rcmd">admin_rcmd</option>
-                <option value="admin_block">admin_block</option>
-                <option value="admin">admin</option>
-              </select>
-            </div>
-            <div class="row between">
-              <button class="btn" type="submit">إضافة User</button>
-              <span class="muted" id="createUserMsg"></span>
-            </div>
-          </form>
-
-          <div class="subTitle">قائمة المستخدمين</div>
-          <div class="muted" style="margin-bottom:8px;">يمكنك حذف/تعديل أي مستخدم (ماعدا CEO أو حسابك الحالي).</div>
-
-          <div class="field" style="margin:10px 0 6px;">
-            <label>بحث بالإيميل</label>
-            <input id="userEmailSearch" type="search" placeholder="ابحث: name@example.com" />
-          </div>
-
-          <div class="field" style="margin:10px 0 6px;">
-            <label>بحث بالصلاحية (Role)</label>
-            <select id="userRoleFilter">
-              <option value="">الكل</option>
-              <option value="ceo">ceo</option>
-              <option value="admin">admin</option>
-              <option value="admin_add">admin_add</option>
-              <option value="admin_del">admin_del</option>
-              <option value="admin_rcmd">admin_rcmd</option>
-              <option value="admin_block">admin_block</option>
-              <option value="user">user</option>
-              <option value="basic">basic</option>
-            </select>
-          </div>
-
-          <div class="chips" id="roleChips" style="margin:6px 0 10px;">
-            <button class="chipBtn" type="button" data-role="">الكل</button>
-            <button class="chipBtn" type="button" data-role="ceo">ceo</button>
-            <button class="chipBtn" type="button" data-role="admin">admin</button>
-            <button class="chipBtn" type="button" data-role="admin_add">admin_add</button>
-            <button class="chipBtn" type="button" data-role="admin_del">admin_del</button>
-            <button class="chipBtn" type="button" data-role="admin_rcmd">admin_rcmd</button>
-            <button class="chipBtn" type="button" data-role="admin_block">admin_block</button>
-            <button class="chipBtn" type="button" data-role="user">user</button>
-            <button class="chipBtn" type="button" data-role="basic">basic</button>
-          </div>
-
-          <div class="tableWrap">
-            <table class="table" id="allUsersTable">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Created</th>
-                  <th>Blocked</th>
-                  <th>إدارة</th>
-                </tr>
-              </thead>
-              <tbody id="allUsersBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="card contact">
-        <div class="card-title">Contact Us</div>
-        <div class="contact-text">01118567999</div>
-      </div>
-
-      <div class="card notes">
-        <div class="card-title">ملاحظات</div>
-        <div class="muted">
-          - الأسعار المعروضة ليست لحظية (التشارت من TradingView وقد يكون متأخر).<br/>
-          - هدف الموقع هو تنظيم التوصيات وعرضها بشكل احترافي.
-        </div>
-      </div>
-    </aside>
-  </main>
-
-  <!-- Modal -->
-  <div class="modal" id="addModal" aria-hidden="true">
-    <div class="modal-card">
-      <div class="modal-head">
-        <div class="modal-title">إضافة توصية جديدة</div>
-        <button class="iconBtn" id="closeAddModalBtn">✕</button>
-      </div>
-
-      <form id="addRecForm" class="modal-body">
-        <div class="row">
-          <div class="field">
-            <label>السهم</label>
-            <select id="addStock"></select>
-          </div>
-          <div class="field">
-            <label>سعر الدخول</label>
-            <input id="addEntry" type="number" step="0.01" placeholder="Entry Price" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label>الهدف</label>
-            <input id="addTarget" type="number" step="0.01" placeholder="Take Profit" />
-          </div>
-          <div class="field">
-            <label>نسبة جني الأرباح</label>
-            <input id="addProfitPct" type="text" placeholder="%" readonly />
-          </div>
-          <div class="field">
-            <label>تاريخ التوصية</label>
-            <input id="addRecDate" type="date" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label>تاريخ الدخول</label>
-            <input id="addEntryDate" type="date" />
-          </div>
-          <div class="field">
-            <label>تاريخ جني الأرباح (الخروج)</label>
-            <input id="addExitDate" type="date" />
-          </div>
-        </div>
-        <div class="field">
-          <label>ملاحظات</label>
-          <textarea id="addNotes" rows="3" placeholder="Notes"></textarea>
-        </div>
-
-        <div class="row between">
-          <div class="muted" id="addRecHint"></div>
-          <button class="btn" type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script src="tv.js"></script>
-  <script type="module" src="app.js"></script>
-  <script src="theme.js"></script>
-</body>
-</html>
