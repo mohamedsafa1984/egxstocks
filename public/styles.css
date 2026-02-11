@@ -227,3 +227,89 @@ body[data-theme="light"] .table th{
 
 .checkRow{display:flex;align-items:center;gap:10px;margin:10px 0;color:var(--muted);font-size:14px}
 .checkRow input{transform:scale(1.1)}
+
+/* =========================
+   Mobile / Small screens
+   ========================= */
+@media (max-width: 768px){
+
+  /* 1) Topbar تتلم بدل ما تكسر */
+  .topbar{
+    padding:10px 12px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .nav{
+    width:100%;
+    justify-content:space-between;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .brand{font-size:14px}
+
+  /* 2) Layout يبقى أريح */
+  .layout{
+    padding:10px;
+    gap:10px;
+  }
+
+  /* 3) الكروت أخف */
+  .card{
+    padding:12px;
+    border-radius:12px;
+  }
+
+  /* 4) الفورم عناصرها تاخد عرض كامل */
+  .row{gap:10px}
+  .field{
+    min-width:100%;
+    flex:1 0 100%;
+  }
+  input, select, textarea{
+    padding:10px 10px;
+    border-radius:12px;
+    font-size:14px;
+  }
+  label{font-size:11px}
+
+  /* 5) Disclaimer أصغر شوية */
+  .disclaimer-text{font-size:12px; line-height:1.55}
+  .disclaimer-title{font-size:14px}
+
+  /* 6) الشارت: أهم تعديل */
+  #tv_chart{height:260px;}       /* كان 420 */
+  .chartWrap{border-radius:12px}
+
+  /* 7) الجدول: خليه يتعرض صح على الموبايل */
+  .tableWrap{
+    -webkit-overflow-scrolling: touch;
+    overflow-x:auto;
+  }
+  .table{
+    min-width:560px;             /* كان 720 */
+  }
+  .table th, .table td{
+    padding:8px 8px;
+    font-size:12px;
+  }
+
+  /* 8) أزرار أصغر */
+  .btn{
+    padding:8px 10px;
+    border-radius:10px;
+    font-size:13px;
+  }
+  .btn-sm{padding:6px 9px;font-size:12px}
+
+  /* 9) لو عندك سايدبار (يمين) خليها تحت تلقائيًا */
+  /* أنت بالفعل بتعملها 1fr تحت 980px، هنا بس بنزبط شكلها */
+  .side .contact-text{font-size:16px}
+}
+
+/* موبايلات صغيرة جدًا */
+@media (max-width: 420px){
+  #tv_chart{height:230px;}
+  .topbar{padding:10px}
+  .btn{font-size:12px}
+  .table{min-width:520px;}
+}
