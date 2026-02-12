@@ -563,6 +563,57 @@ body[data-theme="light"] .table th{
   .nav .themeSwitch{
     flex: 1 1 auto;
     text-align: center;
+/* Mobile first fixes */
+@media (max-width: 600px){
+
+  .topbar{
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 12px;
+    position: sticky;
+    top: 0;
+  }
+
+  /* خلي العنوان لوحده فوق */
+  .brand{
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: normal;
+    order: 1;
+  }
+
+  /* خلي الأزرار تحت العنوان */
+  .nav{
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    order: 2;
+  }
+
+  .btn{
+    padding: 8px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+  }
+
+  .themeSwitch{
+    padding: 7px 10px;
+    border-radius: 12px;
+  }
+
+  /* layout padding أقل */
+  .layout{ padding: 10px; }
+
+  /* الشارت مايبقاش ضخم */
+  #tv_chart{ height: 320px; }
+
+  /* لو لسه حاسس إن الـ topbar بيغطي أول كارت */
+  main.layout{ padding-top: 8px; }
+}
+
   }
 }
   }
