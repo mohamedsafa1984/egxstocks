@@ -409,7 +409,19 @@ body[data-theme="light"] .table th{
    Fix topbar overflow & spacing
    =========================== */
 @media (max-width: 600px){
-  html, body{ width:100%; overflow-x:hidden; }
+  html, body{ width:100%; overflow-x:visible; }
+
+  /* Prevent TradingView / embedded widgets from forcing page wider than viewport */
+  #tv_chart, .chartWrap{ max-width:100%; }
+  #tv_chart{ min-width:0; }
+  #tv_chart iframe, .chartWrap iframe, .chartWrap > iframe, .chartWrap > div iframe{
+    width:100% !important;
+    max-width:100% !important;
+    display:block;
+  }
+  .layout, .card{ max-width:100%; }
+  .topbar{ padding-left: max(12px, env(safe-area-inset-left)); padding-right: max(12px, env(safe-area-inset-right)); }
+
   body{ -webkit-text-size-adjust: 100%; }
 
   .topbar{
