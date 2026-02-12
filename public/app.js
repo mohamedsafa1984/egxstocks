@@ -48,18 +48,18 @@ async function loadRecommendations(){
     if (r.hidden) tr.classList.add('isHidden');
     if (r.hidden_basic) tr.classList.add('isBasicHidden');
     tr.innerHTML = `
-      <td>${renderConfidenceCell(r, canRecManage)}</td>
-      <td>${escapeHtml(r.analyst || "")}</td>
-      <td><b>${escapeHtml((r.stock||"").toUpperCase())}</b></td>
-      <td>${r.entry_price ?? ""}</td>
-      <td>${r.take_profit ?? ""}</td>
-      <td>${profitPctCell(r)}</td>
-      <td>${renderRecGradeCell(r, canRecManage)}</td>
-      <td>${fmtDate(r.rec_date || "")}</td>
-      <td>${fmtDate(r.exit_date || "")}</td>
-      <td title="${escapeHtml(r.notes || "")}">${escapeHtml(shorten(r.notes || "", 40))}</td>
-      <td>${fmtDate(r.created_at)}</td>
-      ${canRecManage ? `<td>${adminButtons(r, { canHideAll, canHideBasic, canDeleteRec })}</td>` : ``}
+      <td data-label="ثقة المحلل">${renderConfidenceCell(r, canRecManage)}</td>
+      <td data-label="المحلل">${escapeHtml(r.analyst || "")}</td>
+      <td data-label="السهم"><b>${escapeHtml((r.stock||"").toUpperCase())}</b></td>
+      <td data-label="الدخول">${r.entry_price ?? ""}</td>
+      <td data-label="الهدف">${r.take_profit ?? ""}</td>
+      <td data-label="نسبة جني الأرباح">${profitPctCell(r)}</td>
+      <td data-label="الثقة في التوصية">${renderRecGradeCell(r, canRecManage)}</td>
+      <td data-label="تاريخ التوصية">${fmtDate(r.rec_date || "")}</td>
+      <td data-label="تاريخ الخروج">${fmtDate(r.exit_date || "")}</td>
+      <td data-label="ملاحظات" title="${escapeHtml(r.notes || "")}">${escapeHtml(shorten(r.notes || "", 40))}</td>
+      <td data-label="تاريخ الإضافة">${fmtDate(r.created_at)}</td>
+      ${canRecManage ? `<td data-label="إدارة">${adminButtons(r, { canHideAll, canHideBasic, canDeleteRec })}</td>` : ``}
     `;
     body.appendChild(tr);
   }
