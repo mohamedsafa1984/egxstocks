@@ -535,6 +535,36 @@ body[data-theme="light"] .table th{
   /* Optional: safe area (iPhone notch) */
   .topbar{
     padding-top: calc(10px + env(safe-area-inset-top));
+
+
+/* Mobile Portrait Fix */
+@media (max-width: 600px) {
+
+  .topbar{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .brand{
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .nav{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .nav .btn,
+  .nav .themeSwitch{
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
   }
 }
 
