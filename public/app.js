@@ -822,4 +822,41 @@ async function editRecPrompt(id){
     body: JSON.stringify({ analyst, stock, entry_price: entry, take_profit: target, expected_time: time, analyst_confidence: conf, rec_grade: grade, notes })
   });
   await loadRecommendations();
+
+(function () {
+  const vp = document.querySelector('#viewport');
+
+  // اختار عرض "الديسكتوب" اللي انت مصمم عليه
+  // جرب 1200 أو 1280 حسب شكل موقعك
+  const DESIGN_WIDTH_PORTRAIT  = 1200;
+  const DESIGN_WIDTH_LANDSCAPE = 1200;
+
+  function applyFitViewport() {
+    if (!vp) return;
+
+    // على iOS الأفضل تستخدم screen.width/height مع orientation
+    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+
+    const designWidth = isLandscape ? DESIGN_WIDTH_LANDSCAPE : DESIGN_WIDTH_PORTRAIT;
+
+    // عرض الجهاز الفعلي بالبيكسل المنطقي
+    const deviceWidth = Math.min(window.screen.width, window.screen.height) * (isLandscape ? 1 : 1);
+
+    // scale = deviceWidth / designWidth
+    // نحط حد أدنى عشان مايبقاش صغير زيادة
+    let scale = deviceWidth / designWidth;
+    scale = Math.max(scale, 0.22); // عدّلها لو حاسسها صغيرة قوي
+    scale = Math.min(scale, 1);
+
+    vp.setAttribute(
+      "content",
+      `width=${designWidth}, initial-scale=${scale}, viewport-fit=cover, user-scalable=yes`
+    );
+  }
+
+  window.addEventListener("load", applyFitViewport);
+  window.addEventListener("resize", () => setTimeout(applyFitViewport, 150));
+  window.addEventListener("orientationchange", () => setTimeout(applyFitViewport, 200));
+})();
+
 }
