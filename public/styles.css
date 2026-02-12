@@ -406,7 +406,8 @@ body[data-theme="light"] .table th{
 
 /* ===== Mobile: tables as cards (recommendations + users) ===== */
 @media (max-width: 768px) {
-  html, body { overflow-x: hidden; }
+  html, body { overflow-x: auto; }
+  body { -webkit-overflow-scrolling: touch; }
 
   /* Make the main wrappers fluid */
   .layout, .main, main, .container { max-width: 100%; width: 100%; }
